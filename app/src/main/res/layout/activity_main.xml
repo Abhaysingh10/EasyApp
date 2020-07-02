@@ -9,14 +9,14 @@
 
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/googleLogin_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_style"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintBottom_toBottomOf="@+id/facebookLogin_button"
+        app:layout_constraintEnd_toStartOf="@+id/facebookLogin_button"
         app:layout_constraintStart_toStartOf="@+id/login"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/facebookLogin_button"
         app:srcCompat="@drawable/google" />
 
     <Button
@@ -51,10 +51,11 @@
         app:layout_constraintTop_toBottomOf="@+id/login" />
 
     <TextView
+        android:id="@+id/guestMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter as guest"
 
+        android:text="Enter as guest"
         android:textColor="@android:color/background_dark"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/register" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/facebookLogin_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
@@ -73,20 +74,20 @@
         android:layout_marginRight="15dp"
         android:background="@drawable/button_style"
         app:layout_constraintBottom_toTopOf="@+id/login"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintEnd_toStartOf="@+id/twitterLogin_button"
+        app:layout_constraintStart_toEndOf="@+id/googleLogin_button"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/facebook" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/twitterLogin_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_style"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
+        app:layout_constraintBottom_toBottomOf="@+id/facebookLogin_button"
         app:layout_constraintEnd_toEndOf="@+id/login"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2"
+        app:layout_constraintStart_toEndOf="@+id/facebookLogin_button"
+        app:layout_constraintTop_toTopOf="@+id/facebookLogin_button"
         app:srcCompat="@drawable/twitter" />
 
 

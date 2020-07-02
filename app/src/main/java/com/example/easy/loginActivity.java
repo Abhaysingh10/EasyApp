@@ -6,6 +6,8 @@ import  androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,11 +25,11 @@ import java.util.concurrent.Executor;
 public class loginActivity extends AppCompatActivity {
 
 
-    private final static int RC_SIGN_IN= 2 ;
-    private FirebaseAuth firebaseAuth;
-    private EditText email ;
-    private EditText password ;
-    private Button login ;
+     final static int RC_SIGN_IN= 2 ;
+    FirebaseAuth mfirebaseAuth;
+     EditText email ;
+     EditText password ;
+     Button login ;
     //GoogleSignInClient mGoogleSignInClient ;
 
 
@@ -36,42 +38,47 @@ public class loginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        login = findViewById(R.id.register);
+        login = findViewById(R.id.login_button);
 
-        final String getEmail = email.getText().toString();
-        final String getPassword = password.getText().toString();
+
 
         // Code for login with SinInOption
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(getEmail)){
-                    Toast.makeText(loginActivity.this, "Please enter valid mail", Toast.LENGTH_SHORT);
-                }
-                else if (TextUtils.isEmpty(getPassword)){
-                    Toast.makeText( loginActivity.this, "Please enter valid Passsword", Toast.LENGTH_SHORT);
-                }
 
-                firebaseAuth.signInWithEmailAndPassword(getEmail, getPassword)
-                        .addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
+                String user_Email = email.getText().toString();
+                String user_Password = password.getText().toString();
+                mfirebaseAuth = FirebaseAuth.getInstance();
+
+                if(TextUtils.isEmpty(user_Email) || !Patterns.EMAIL_ADDRESS.matcher(user_Email).matches() ){
+                    Toast.makeText(loginActivity.this, "Please enter valid mail", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (TextUtils.isEmpty(user_Password)){
+                    Toast.makeText( loginActivity.this, "Please enter valid Passsword", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+               mfirebaseAuth.signInWithEmailAndPassword(user_Email, user_Password).
+                        addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
-                                    Toast.makeText(loginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT);
+                                    Toast.makeText(loginActivity.this, "Logged in Successfully" , Toast.LENGTH_SHORT).show();
+                                     FirebaseUser firebaseUser = mfirebaseAuth.getCurrentUser();
+                                    startActivity(new Intent(loginActivity.this, afterLogin.class));
                                 }
                                 else {
-                                    Toast.makeText(loginActivity.this, "Login Failed", Toast.LENGTH_SHORT);
+                                    Toast.makeText(loginActivity.this, "Login Failed, Try again", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
+
             }
         });
-
     }
-
-
 }

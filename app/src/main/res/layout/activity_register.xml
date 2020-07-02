@@ -13,6 +13,7 @@
         android:layout_height="45dp"
         android:layout_marginTop="250dp"
         android:hint="Email"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.603"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +26,7 @@
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:hint="Password"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="@+id/email"
         app:layout_constraintStart_toStartOf="@+id/email"
         app:layout_constraintTop_toBottomOf="@+id/email">
@@ -32,7 +34,7 @@
     </EditText>
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/register1"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginBottom="90dp"
