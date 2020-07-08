@@ -25,11 +25,11 @@ import java.util.concurrent.Executor;
 public class loginActivity extends AppCompatActivity {
 
 
-     final static int RC_SIGN_IN= 2 ;
+    final static int RC_SIGN_IN= 2 ;
     FirebaseAuth mfirebaseAuth;
-     EditText email ;
-     EditText password ;
-     Button login ;
+    EditText email ;
+    EditText password ;
+    Button login ;
     //GoogleSignInClient mGoogleSignInClient ;
 
 
@@ -63,13 +63,13 @@ public class loginActivity extends AppCompatActivity {
                     Toast.makeText( loginActivity.this, "Please enter valid Passsword", Toast.LENGTH_SHORT).show();
                     return;
                 }
-               mfirebaseAuth.signInWithEmailAndPassword(user_Email, user_Password).
+                mfirebaseAuth.signInWithEmailAndPassword(user_Email, user_Password).
                         addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
                                     Toast.makeText(loginActivity.this, "Logged in Successfully" , Toast.LENGTH_SHORT).show();
-                                     FirebaseUser firebaseUser = mfirebaseAuth.getCurrentUser();
+                                    FirebaseUser firebaseUser = mfirebaseAuth.getCurrentUser();
                                     startActivity(new Intent(loginActivity.this, afterLogin.class));
                                 }
                                 else {
