@@ -70,7 +70,10 @@ public class loginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()){
                                     Toast.makeText(loginActivity.this, "Logged in Successfully" , Toast.LENGTH_SHORT).show();
                                     FirebaseUser firebaseUser = mfirebaseAuth.getCurrentUser();
-                                    startActivity(new Intent(loginActivity.this, afterLogin.class));
+                                    String userName = firebaseUser.getDisplayName() ;
+                                    Intent intent = new Intent(loginActivity.this, categories.class);
+                                    intent.putExtra("This is userName" , userName.toString());
+                                    startActivity(intent);
                                 }
                                 else {
                                     Toast.makeText(loginActivity.this, "Login Failed, Try again", Toast.LENGTH_SHORT).show();
