@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton googleLogin_button, facebookLogin_button, twitterLogin_button;
     TextView guestMode;
     FirebaseAuth firebaseAuth;
-    GoogleSignInClient mGoogleSignInClient;
+    public GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 2;
 
 
@@ -123,8 +123,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"Successfull",Toast.LENGTH_SHORT).show();
                     FirebaseUser user = firebaseAuth.getCurrentUser();
                     startActivity(new Intent(MainActivity.this, categories.class));
-                    updateUI(user);
-                }
+
+                }    //   updateUI(user);
 
                 else {
                     Toast.makeText(MainActivity.this,"Failed",Toast.LENGTH_SHORT).show();

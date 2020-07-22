@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.GenericLifecycleObserver;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,6 +24,10 @@ import com.google.android.gms.common.api.GoogleApi;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class categories extends AppCompatActivity {
 
@@ -30,7 +36,8 @@ public class categories extends AppCompatActivity {
     Button logoutbutn;
     GoogleSignInOptions gso;
     GoogleApi googleApi;
-    GoogleSignInClient mSignInClient;
+    GoogleSignInClient mGoogleSignInClient;
+    FirebaseAuth firebaseAuth ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,36 +49,50 @@ public class categories extends AppCompatActivity {
         userName = (TextView) findViewById(R.id.userName);
         profileImage = findViewById(R.id.userProfile_Image);
         logoutbutn = findViewById(R.id.logout_button);
+        firebaseAuth = firebaseAuth.getInstance();
 
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        logoutbutn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             mGoogleSignInClient.signOut()
+             .addOnCompleteListener(categories.this, new OnCompleteListener<Void>() {
+                 @Override
+                 public void onComplete(@NonNull Task<Void> task) {
+                     Toast.makeText(categories.this, "Logged out", Toast.LENGTH_SHORT).show();
+                 }
+             });
+                startActivity(new Intent(categories.this, MainActivity.class));
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        updateUI(firebaseUser);
     }
 
     ////// Need to work on ActivityResult
 
-
-        public void  handleSignInResult(GoogleSignInResult result){
-            if (result.isSuccess()){
-                GoogleSignInAccount account = result.getSignInAccount();
-                userName.setText(account.getDisplayName());
-                try {
-
-            }catch (NullPointerException e){
-                    Toast.makeText(categories.this, "Image not found", Toast.LENGTH_SHORT).show();
-                }
-        }
-            else{
-                gotoMainActivity();
-            }
-
-
+    private void updateUI(FirebaseUser user){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+      if (account != null){
+          String displayName = account.getDisplayName();
+          userName.setText(displayName);
+          Uri DisplayImage =  account.getPhotoUrl();
+          profileImage.setImageURI(DisplayImage);
+      }
+      else{
+          Toast.makeText(categories.this, "Something went wrong" , Toast.LENGTH_LONG).show();
+      }
     }
-
-    private void gotoMainActivity(){
-        startActivity(new Intent(categories.this, MainActivity.class));
-    }
-
 }
 
