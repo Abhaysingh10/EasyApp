@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -32,7 +33,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class categories extends AppCompatActivity {
 
     TextView userName;
-    ImageView profileImage;
+    //ImageView profileImage;
     Button logoutbutn;
     GoogleSignInOptions gso;
     GoogleApi googleApi;
@@ -47,7 +48,7 @@ public class categories extends AppCompatActivity {
 
 
         userName = (TextView) findViewById(R.id.userName);
-        profileImage = findViewById(R.id.userProfile_Image);
+        //profileImage = findViewById(R.id.userProfile_Image);
         logoutbutn = findViewById(R.id.logout_button);
         firebaseAuth = firebaseAuth.getInstance();
 
@@ -87,8 +88,10 @@ public class categories extends AppCompatActivity {
       if (account != null){
           String displayName = account.getDisplayName();
           userName.setText(displayName);
-          Uri DisplayImage =  account.getPhotoUrl();
-          profileImage.setImageURI(DisplayImage);
+       /*   Glide.with(this)
+                  .load(user.getPhotoUrl().toString())
+                  .into(profileImage);
+      */
       }
       else{
           Toast.makeText(categories.this, "Something went wrong" , Toast.LENGTH_LONG).show();

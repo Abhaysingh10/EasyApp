@@ -4,32 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_login"
     tools:context=".registerActivity">
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="Name"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginTop="250dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.603"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/userName">
 
     </EditText>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="120dp"
         android:hint="Password"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/email"
-        app:layout_constraintStart_toStartOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/email">
+        app:layout_constraintBottom_toTopOf="@+id/register1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent">
 
     </EditText>
 
@@ -37,16 +47,15 @@
         android:id="@+id/register1"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="90dp"
         android:fontFamily="@font/arizonia"
         android:shadowColor="@color/white"
         android:text="Register"
 
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="@+id/password">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintStart_toStartOf="parent">
 
     </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>
