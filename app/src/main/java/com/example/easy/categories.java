@@ -1,13 +1,18 @@
 package com.example.easy;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.GenericLifecycleObserver;
 
+import android.app.StatusBarManager;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,10 +40,15 @@ public class categories extends AppCompatActivity {
     TextView userName;
     //ImageView profileImage;
     Button logoutbutn;
+    CardView cardView, categoryOne, categoryTwo, categoryThree, boxOne ;
+    TextView categoryTextOne, categoryTextTwo, categoryTextThree;
+    TextView categoryText ;
     GoogleSignInOptions gso;
     GoogleApi googleApi;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth firebaseAuth ;
+;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +56,23 @@ public class categories extends AppCompatActivity {
         setContentView(R.layout.activity_categories);
 
 
-
         userName = (TextView) findViewById(R.id.userName);
         //profileImage = findViewById(R.id.userProfile_Image);
         logoutbutn = findViewById(R.id.logout_button);
+        cardView = findViewById(R.id.cardView);
+        categoryOne = findViewById(R.id.categoryOne);
+        categoryTwo = findViewById(R.id.categoryTwo);
+        categoryThree = findViewById(R.id.categoryThree);
+        boxOne = findViewById(R.id.boxOne);
+        categoryText = findViewById(R.id.categoryText);
         firebaseAuth = firebaseAuth.getInstance();
+        categoryTextOne = findViewById(R.id.categoryTextOne);
+        categoryTextTwo = findViewById(R.id.categoryTextTwo);
+        categoryTextThree = findViewById(R.id.categoryTextThree);
 
 
+   //     Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/regular.otf");
+     //   categoryText.setTypeface(typeface);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();

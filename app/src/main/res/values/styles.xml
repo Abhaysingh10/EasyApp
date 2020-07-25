@@ -11,5 +11,8 @@
         <item name="android:windowBackground">@drawable/background_splashscreen</item>
     </style>
 
+    <style name="categories" parent="Theme.MaterialComponents.Light.NoActionBar">
+    </style>
+
 
 </resources>
