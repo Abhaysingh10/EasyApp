@@ -1,361 +1,362 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="vertical"
-    tools:context=".categories">
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="68dp"
-        app:cardBackgroundColor="#28CC9B"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:elevation="0dp"
+        android:scrollbars="vertical"
+        tools:context=".categories">
 
-        <TextView
-            android:id="@+id/userName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:paddingLeft="@android:dimen/app_icon_size"
-            android:text="Abhay Singh"
-            android:textColor="#FCFCFC"
-            android:fontFamily="@font/regular"
-            android:textSize="22dp"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/imageView2"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:layout_gravity="center_vertical"
-            android:paddingStart="320dp"
-            app:srcCompat="@drawable/setting"
-            android:paddingLeft="320dp"
-            android:clickable="true"/>
-
-    </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/categoryOne"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="20dp"
-        app:cardBackgroundColor="#28CC9B"
-        app:cardCornerRadius="20dp"
-        android:clickable="true"
-        app:cardElevation="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryText"
-        app:layout_constraintRight_toLeftOf="@id/categoryTwo"
-        >
-
-        <TextView
-            android:id="@+id/categoryTextOne"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/regular"
-            android:text="Guide"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="13dp" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/categoryTwo"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        app:cardCornerRadius="20dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toStartOf="@+id/categoryThree"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toEndOf="@+id/categoryOne"
-        app:layout_constraintTop_toTopOf="@id/categoryOne"
-        app:strokeColor="#707070"
-        app:strokeWidth="1dp"
-        app:cardElevation="1dp"
-        tools:layout_editor_absoluteY="136dp">
-
-        <TextView
-            android:id="@+id/categoryTextTwo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/regular"
-            android:text="Guide"
-            android:textSize="13dp" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/categoryThree"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        app:cardCornerRadius="20dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="#707070"
-        android:clickable="true"
-        app:cardElevation="1dp"
-        app:layout_constraintBottom_toBottomOf="@+id/categoryTwo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/categoryTwo"
-        app:layout_constraintLeft_toRightOf="@id/categoryTwo"
-        app:layout_constraintVertical_bias="0.0">
-
-        <TextView
-            android:id="@+id/categoryTextThree"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/regular"
-            android:text="Guide"
-            android:textSize="13dp" />
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="97dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="68dp"
-
-        android:text="Logout"
-        app:backgroundTint="@color/statusColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintCircleRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/boxFive"
-        app:layout_constraintStart_toStartOf="@+id/boxFive"
-        app:layout_constraintTop_toBottomOf="@+id/boxFive"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/categoryText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/regular"
-        android:text="Choose your category"
-        android:textColor="@color/design_default_color_on_secondary"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/categoryTwo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/boxOne"
-        android:layout_width="360dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        app:cardBackgroundColor="@color/categoryColor"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="6dp"
-        android:outlineAmbientShadowColor="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryTwo"
-        app:strokeColor="#000000"
-        app:strokeWidth="0dp">
-
-
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="0dp"
-            android:src="@drawable/mirzapur"
-            app:civ_border_color="#000000"
-            app:civ_border_width="2dp"
-            app:civ_shadow="true"
-            app:civ_shadow_color="#00858080"
-            app:civ_shadow_radius="10dp" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="175dp"
             android:layout_height="68dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="45dp"
-            android:fontFamily="@font/regular"
-            android:lineSpacingExtra="8sp"
-            android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et."
-            android:textSize="13dp" />
+            app:cardBackgroundColor="#28CC9B"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/regular"
+                android:paddingLeft="@android:dimen/app_icon_size"
+                android:text="Abhay Singh"
+                android:textColor="#FCFCFC"
+                android:textSize="22dp"
+                android:visibility="visible" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/boxTwo"
-        android:layout_width="360dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="30dp"
-        android:clickable="true"
-        app:cardBackgroundColor="@color/categoryColor"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="6dp"
-        app:layout_constraintEnd_toEndOf="@+id/boxOne"
-        app:layout_constraintStart_toStartOf="@+id/boxOne"
-        app:layout_constraintTop_toBottomOf="@+id/boxOne">
+            <ImageView
+                android:id="@+id/profileSetting"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_gravity="center_vertical"
+                android:clickable="true"
+                android:paddingStart="320dp"
+                android:paddingLeft="320dp"
+                android:contextClickable="true"
+                app:srcCompat="@drawable/setting" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="175dp"
-            android:layout_height="68dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="35dp"
-            android:fontFamily="@font/regular"
-            android:lineSpacingExtra="8sp"
-            android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et."
-            android:textSize="13dp" />
+        </androidx.cardview.widget.CardView>
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="220dp"
-            app:civ_border_color="#000000"
-            app:civ_border_width="2dp"
-            app:civ_shadow="true"
-            app:civ_shadow_color="#0028CC9B"
-            app:civ_shadow_radius="10dp"
-            app:srcCompat="@drawable/spidermanintospiderverse" />
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/categoryOne"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            app:cardBackgroundColor="#28CC9B"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="1dp"
+            app:layout_constraintRight_toLeftOf="@id/categoryTwo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoryText">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/categoryFour"
-        android:layout_width="360dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="30dp"
-        android:clickable="true"
-        app:cardBackgroundColor="@color/categoryColor"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="6dp"
-        app:layout_constraintEnd_toEndOf="@+id/boxTwo"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/boxTwo"
-        app:layout_constraintTop_toBottomOf="@+id/boxTwo">
+            <TextView
+                android:id="@+id/categoryTextOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/regular"
+                android:text="Guide"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="13dp" />
+        </com.google.android.material.card.MaterialCardView>
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="0dp"
-            android:src="@drawable/shazam"
-            app:civ_border_color="#000000"
-            app:civ_border_width="2dp"
-            app:civ_shadow="true"
-            app:civ_shadow_color="#008B9793"
-            app:civ_shadow_radius="10dp" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/categoryTwo"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="1dp"
+            app:layout_constraintEnd_toStartOf="@+id/categoryThree"
+            app:layout_constraintHorizontal_bias="0.432"
+            app:layout_constraintStart_toEndOf="@+id/categoryOne"
+            app:layout_constraintTop_toTopOf="@id/categoryOne"
+            app:strokeColor="#707070"
+            app:strokeWidth="1dp"
+            tools:layout_editor_absoluteY="136dp">
 
-        <TextView
-            android:id="@+id/textCategoryfour"
-            android:layout_width="175dp"
-            android:layout_height="68dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="45dp"
-            android:fontFamily="@font/regular"
-            android:lineSpacingExtra="8sp"
-            android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et."
-            android:textSize="13dp" />
+            <TextView
+                android:id="@+id/categoryTextTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/regular"
+                android:text="Guide"
+                android:textSize="13dp" />
+        </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/categoryThree"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:clickable="true"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="1dp"
+            app:layout_constraintBottom_toBottomOf="@+id/categoryTwo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/categoryTwo"
+            app:layout_constraintTop_toTopOf="@+id/categoryTwo"
+            app:layout_constraintVertical_bias="0.0"
+            app:strokeColor="#707070"
+            app:strokeWidth="1dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/boxFour"
-        android:layout_width="360dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="30dp"
-        android:clickable="true"
-        app:cardBackgroundColor="@color/categoryColor"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="6dp"
-        app:layout_constraintEnd_toEndOf="@+id/categoryFour"
-        app:layout_constraintStart_toStartOf="@+id/categoryFour"
-        app:layout_constraintTop_toBottomOf="@+id/categoryFour">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="175dp"
-            android:layout_height="68dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="35dp"
-            android:fontFamily="@font/regular"
-            android:lineSpacingExtra="8sp"
-            android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et."
-            android:textSize="13dp" />
-
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="220dp"
-            app:civ_border_color="#000000"
-            app:civ_border_width="2dp"
-            app:civ_shadow="true"
-            app:civ_shadow_color="#0028CC9B"
-            app:civ_shadow_radius="10dp"
-            app:srcCompat="@drawable/spidermanintospiderverse" />
-    </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/categoryTextThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/regular"
+                android:text="Guide"
+                android:textSize="13dp" />
+        </com.google.android.material.card.MaterialCardView>
 
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/boxFive"
-        android:layout_width="360dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="30dp"
-        android:clickable="true"
-        app:cardBackgroundColor="@color/categoryColor"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="6dp"
-        app:layout_constraintLeft_toLeftOf="@id/boxFour"
-        app:layout_constraintRight_toRightOf="@id/boxFour"
-        app:layout_constraintTop_toBottomOf="@id/boxFour">
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="97dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="68dp"
 
-
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="0dp"
-            android:src="@drawable/shazam"
-            app:civ_border_color="#000000"
-            app:civ_border_width="2dp"
-            app:civ_shadow="true"
-            app:civ_shadow_color="#008B9793"
-            app:civ_shadow_radius="10dp" />
+            android:text="Logout"
+            app:backgroundTint="@color/statusColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintCircleRadius="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/boxFive"
+            app:layout_constraintStart_toStartOf="@+id/boxFive"
+            app:layout_constraintTop_toBottomOf="@+id/boxFive"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textCategoryfive"
-            android:layout_width="175dp"
-            android:layout_height="68dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="45dp"
+            android:id="@+id/categoryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/regular"
-            android:lineSpacingExtra="8sp"
-            android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et."
-            android:textSize="13dp" />
+            android:text="Choose your category"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/categoryTwo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/boxOne"
+            android:layout_width="360dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:outlineAmbientShadowColor="#fff"
+            app:cardBackgroundColor="@color/categoryColor"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoryTwo"
+            app:strokeColor="#000000"
+            app:strokeWidth="0dp">
 
 
-    </com.google.android.material.card.MaterialCardView>
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="0dp"
+                android:src="@drawable/mirzapur"
+                app:civ_border_color="#000000"
+                app:civ_border_width="2dp"
+                app:civ_shadow="true"
+                app:civ_shadow_color="#00858080"
+                app:civ_shadow_radius="10dp" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="175dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="45dp"
+                android:fontFamily="@font/regular"
+                android:lineSpacingExtra="8sp"
+                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et."
+                android:textSize="13dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/boxTwo"
+            android:layout_width="360dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
+            app:cardBackgroundColor="@color/categoryColor"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="@+id/boxOne"
+            app:layout_constraintStart_toStartOf="@+id/boxOne"
+            app:layout_constraintTop_toBottomOf="@+id/boxOne">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="175dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="35dp"
+                android:fontFamily="@font/regular"
+                android:lineSpacingExtra="8sp"
+                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptuaa. At vero eos et."
+                android:textSize="13dp" />
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="220dp"
+                app:civ_border_color="#000000"
+                app:civ_border_width="2dp"
+                app:civ_shadow="true"
+                app:civ_shadow_color="#0028CC9B"
+                app:civ_shadow_radius="10dp"
+                app:srcCompat="@drawable/spidermanintospiderverse" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/categoryFour"
+            android:layout_width="360dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
+            app:cardBackgroundColor="@color/categoryColor"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="@+id/boxTwo"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/boxTwo"
+            app:layout_constraintTop_toBottomOf="@+id/boxTwo">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="0dp"
+                android:src="@drawable/shazam"
+                app:civ_border_color="#000000"
+                app:civ_border_width="2dp"
+                app:civ_shadow="true"
+                app:civ_shadow_color="#008B9793"
+                app:civ_shadow_radius="10dp" />
+
+            <TextView
+                android:id="@+id/textCategoryfour"
+                android:layout_width="175dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="45dp"
+                android:fontFamily="@font/regular"
+                android:lineSpacingExtra="8sp"
+                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et."
+                android:textSize="13dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/boxFour"
+            android:layout_width="360dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
+            app:cardBackgroundColor="@color/categoryColor"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="@+id/categoryFour"
+            app:layout_constraintStart_toStartOf="@+id/categoryFour"
+            app:layout_constraintTop_toBottomOf="@+id/categoryFour">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="175dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="35dp"
+                android:fontFamily="@font/regular"
+                android:lineSpacingExtra="8sp"
+                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et."
+                android:textSize="13dp" />
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="220dp"
+                app:civ_border_color="#000000"
+                app:civ_border_width="2dp"
+                app:civ_shadow="true"
+                app:civ_shadow_color="#0028CC9B"
+                app:civ_shadow_radius="10dp"
+                app:srcCompat="@drawable/spidermanintospiderverse" />
+        </com.google.android.material.card.MaterialCardView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/boxFive"
+            android:layout_width="360dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
+            app:cardBackgroundColor="@color/categoryColor"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="6dp"
+            app:layout_constraintLeft_toLeftOf="@id/boxFour"
+            app:layout_constraintRight_toRightOf="@id/boxFour"
+            app:layout_constraintTop_toBottomOf="@id/boxFour">
+
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="0dp"
+                android:src="@drawable/shazam"
+                app:civ_border_color="#000000"
+                app:civ_border_width="2dp"
+                app:civ_shadow="true"
+                app:civ_shadow_color="#008B9793"
+                app:civ_shadow_radius="10dp" />
+
+            <TextView
+                android:id="@+id/textCategoryfive"
+                android:layout_width="175dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="45dp"
+                android:fontFamily="@font/regular"
+                android:lineSpacingExtra="8sp"
+                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et."
+                android:textSize="13dp" />
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
 

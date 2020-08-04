@@ -6,13 +6,140 @@
     android:layout_height="match_parent"
     tools:context=".Questionnaire">
 
-    <ImageView
-        android:id="@+id/movie_logo"
-        android:layout_width="179dp"
-        android:layout_height="143dp"
-        android:layout_marginTop="168dp"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="181dp"
+        app:cardBackgroundColor="#28CC9B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/google" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:layout_width="102dp"
+            android:layout_height="98dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="40dp"
+            app:civ_border_width="0dp"
+            android:src="@drawable/mirzapur" />
+
+        <TextView
+            android:id="@+id/movieName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="170dp"
+            android:isScrollContainer="true"
+            android:fontFamily="@font/regular"
+            android:text="Movie Name"
+            android:textSize="30dp" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/Question"
+        android:layout_width="370dp"
+        android:layout_height="138dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/regular"
+        android:lineSpacingExtra="12sp"
+        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/optionOne"
+        app:layout_constraintStart_toStartOf="@+id/optionOne"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        android:gravity="center_vertical"
+        tools:ignore="RtlCompat" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/optionOne"
+        android:layout_width="370dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#ffffff"
+        android:fontFamily="@font/regular"
+        android:text="Option One"
+        android:textColor="#8F000000"
+        android:textSize="13dp"
+        app:cornerRadius="30dp"
+        android:shadowRadius="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Question" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/optionTwo"
+        android:layout_width="370dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/regular"
+        android:text="Option Two"
+        app:cornerRadius="30dp"
+        android:backgroundTint="#ffffff"
+        android:textColor="#8F000000"
+        app:layout_constraintBottom_toTopOf="@+id/optionThree"
+        app:layout_constraintEnd_toEndOf="@+id/optionOne"
+        app:layout_constraintStart_toStartOf="@+id/optionOne"
+        app:layout_constraintTop_toBottomOf="@+id/optionOne" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/optionThree"
+        android:layout_width="370dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp"
+        android:text="Option Three"
+        app:cornerRadius="30dp"
+        android:fontFamily="@font/regular"
+        android:backgroundTint="#ffffff"
+        android:textColor="#8F000000"
+        app:layout_constraintEnd_toEndOf="@+id/optionTwo"
+        app:layout_constraintStart_toStartOf="@+id/optionTwo"
+        app:layout_constraintTop_toBottomOf="@+id/optionTwo" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/optionFour"
+        android:layout_width="370dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp"
+        android:text="Option Four"
+        android:fontFamily="@font/regular"
+        android:backgroundTint="#ffffff"
+        android:textColor="#8F000000"
+        app:cornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/optionThree"
+        app:layout_constraintStart_toStartOf="@+id/optionThree"
+        app:layout_constraintTop_toBottomOf="@+id/optionThree" />
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:textColor="#8F000000"
+        app:cornerRadius="30dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/regular"
+        app:layout_constraintEnd_toEndOf="@+id/optionFour"
+        app:layout_constraintTop_toBottomOf="@+id/optionFour" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        app:cornerRadius="30dp"
+        android:textColor="#8F000000"
+        android:fontFamily="@font/regular"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/nextButton"
+        app:layout_constraintStart_toStartOf="@+id/optionFour"
+        app:layout_constraintTop_toTopOf="@+id/nextButton" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

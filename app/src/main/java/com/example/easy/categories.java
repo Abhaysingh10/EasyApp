@@ -38,7 +38,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class categories extends AppCompatActivity {
 
     TextView userName;
-    //ImageView profileImage;
+    ImageView profileSettingbtn; ;
     Button logoutbutn;
     CardView cardView, categoryOne, categoryTwo, categoryThree, boxOne ;
     TextView categoryTextOne, categoryTextTwo, categoryTextThree;
@@ -47,6 +47,7 @@ public class categories extends AppCompatActivity {
     GoogleApi googleApi;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth firebaseAuth ;
+    String givenName;
 ;
 
 
@@ -60,6 +61,7 @@ public class categories extends AppCompatActivity {
         //profileImage = findViewById(R.id.userProfile_Image);
         logoutbutn = findViewById(R.id.logout_button);
         cardView = findViewById(R.id.cardView);
+        profileSettingbtn = findViewById(R.id.profileSetting);
         categoryOne = findViewById(R.id.categoryOne);
         categoryTwo = findViewById(R.id.categoryTwo);
         categoryThree = findViewById(R.id.categoryThree);
@@ -69,6 +71,7 @@ public class categories extends AppCompatActivity {
         categoryTextOne = findViewById(R.id.categoryTextOne);
         categoryTextTwo = findViewById(R.id.categoryTextTwo);
         categoryTextThree = findViewById(R.id.categoryTextThree);
+
 
 
    //     Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/regular.otf");
@@ -92,7 +95,16 @@ public class categories extends AppCompatActivity {
                 startActivity(new Intent(categories.this, MainActivity.class));
             }
         });
+
+        profileSettingbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(categories.this, profileSetting.class));
+            }
+        });
+
     }
+
 
     @Override
     protected void onStart() {
@@ -107,7 +119,8 @@ public class categories extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
       if (account != null){
           String displayName = account.getDisplayName();
-          userName.setText(displayName);
+          givenName = account.getGivenName();
+          userName.setText(givenName);
        /*   Glide.with(this)
                   .load(user.getPhotoUrl().toString())
                   .into(profileImage);
