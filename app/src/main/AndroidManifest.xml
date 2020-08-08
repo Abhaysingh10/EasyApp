@@ -3,7 +3,7 @@
     package="com.example.easy">
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,12 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <activity android:name=".profileSetting" android:theme="@style/categories"></activity>
+        <activity android:name=".demoList"></activity>
+        <activity
+            android:name=".profileSetting"
+            android:theme="@style/categories" />
         <activity android:name=".profileRegister" />
         <activity
             android:name=".categories"
             android:theme="@style/categories" />
-        <activity android:name=".Questionnaire" android:theme="@style/categories"/>
+        <activity
+            android:name=".Questionnaire"
+            android:theme="@style/categories" />
         <activity android:name=".loginActivity" />
         <activity android:name=".afterLogin" />
         <activity android:name=".registerActivity" />
