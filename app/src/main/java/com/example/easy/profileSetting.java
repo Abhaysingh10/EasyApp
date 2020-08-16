@@ -29,12 +29,12 @@ public class profileSetting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_setting);
+       // setContentView(R.layout.activity_profile_setting);
 
-        imageView = findViewById(R.id.profileImage);
-        userName = findViewById(R.id.username);
-        email = findViewById(R.id.email);
-        getGivenName = findViewById(R.id.getGivenName);
+    //    imageView = findViewById(R.id.profileImage);
+     //   userName = findViewById(R.id.username);
+       // email = findViewById(R.id.email);
+        //etGivenName = findViewById(R.id.getGivenName);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){

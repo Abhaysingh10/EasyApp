@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Questionnaire.class));
+                startActivity(new Intent(MainActivity.this, mapActivity.class));
             }
         });
 

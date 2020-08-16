@@ -44,7 +44,6 @@ public class categories extends AppCompatActivity {
     TextView categoryTextOne, categoryTextTwo, categoryTextThree;
     TextView categoryText ;
     GoogleSignInOptions gso;
-    GoogleApi googleApi;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth firebaseAuth ;
     String givenName;

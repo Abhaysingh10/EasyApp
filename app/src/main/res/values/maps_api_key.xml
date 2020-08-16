@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources>
+    
+    <string name="map_key" templateMergeStrategy = "preserve" translatable="false">AIzaSyCNzVuA91zXuZFbi4I-0M614RWqTfBIE3k</string>
+    
+</resources>

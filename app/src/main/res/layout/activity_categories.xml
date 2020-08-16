@@ -44,8 +44,7 @@
                 android:clickable="true"
                 android:paddingStart="320dp"
                 android:paddingLeft="320dp"
-                android:contextClickable="true"
-                app:srcCompat="@drawable/setting" />
+                android:contextClickable="true" />
 
         </androidx.cardview.widget.CardView>
 
