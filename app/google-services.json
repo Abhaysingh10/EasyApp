@@ -8,9 +8,83 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:972831194122:android:361ee1ff32d62c619b73f3",
+        "android_client_info": {
+          "package_name": "com.example.database"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972831194122-54c8uk5fu3rgl9m8j1kah84ucj00ivfq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAp-SU3dviiDFd9zhF_PvqcEOMw4j1obPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972831194122-54c8uk5fu3rgl9m8j1kah84ucj00ivfq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:972831194122:android:434fcf1f9d740a859b73f3",
         "android_client_info": {
           "package_name": "com.example.easy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972831194122-7bkceir1jrv4gte65ekgo2tkqdoa9bks.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.easy",
+            "certificate_hash": "834d071564a1112ec346d4443548192a98eb66e9"
+          }
+        },
+        {
+          "client_id": "972831194122-o39gl5p1o9ls157rj5nprckpfad2q9ea.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.easy",
+            "certificate_hash": "5d74b790db847af575466d2954a1300091860300"
+          }
+        },
+        {
+          "client_id": "972831194122-54c8uk5fu3rgl9m8j1kah84ucj00ivfq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAp-SU3dviiDFd9zhF_PvqcEOMw4j1obPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972831194122-54c8uk5fu3rgl9m8j1kah84ucj00ivfq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972831194122:android:ec1c253a50f579e29b73f3",
+        "android_client_info": {
+          "package_name": "com.example.firebasedatabase"
         }
       },
       "oauth_client": [

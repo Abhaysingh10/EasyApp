@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,8 +9,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg"
+        android:layout_height="170dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
         android:elevation="0dp"
         android:scrollbars="vertical"
         tools:context=".categories">
@@ -42,9 +51,18 @@
                 android:layout_height="42dp"
                 android:layout_gravity="center_vertical"
                 android:clickable="true"
+                android:contextClickable="true"
                 android:paddingStart="320dp"
-                android:paddingLeft="320dp"
-                android:contextClickable="true" />
+                android:paddingLeft="320dp" />
+
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="97dp"
+                android:layout_height="41dp"
+                android:text="Logout"
+                android:visibility="invisible"
+                app:backgroundTint="@color/statusColor"
+                app:layout_constraintCircleRadius="10dp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -69,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/regular"
-                android:text="Guide"
+                android:text="Home"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="13dp" />
         </com.google.android.material.card.MaterialCardView>
@@ -79,6 +97,7 @@
             android:layout_width="110dp"
             android:layout_height="40dp"
             android:clickable="true"
+            android:onClick="fragment_cat2"
             app:cardCornerRadius="20dp"
             app:cardElevation="1dp"
             app:layout_constraintEnd_toStartOf="@+id/categoryThree"
@@ -95,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/regular"
-                android:text="Guide"
+                android:text="Categories"
                 android:textSize="13dp" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -122,33 +141,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/regular"
-                android:text="Guide"
+                android:text="Profile"
                 android:textSize="13dp" />
         </com.google.android.material.card.MaterialCardView>
 
-
-        <Button
-            android:id="@+id/logout_button"
-            android:layout_width="97dp"
-            android:layout_height="41dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="68dp"
-
-            android:text="Logout"
-            app:backgroundTint="@color/statusColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintCircleRadius="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/boxFive"
-            app:layout_constraintStart_toStartOf="@+id/boxFive"
-            app:layout_constraintTop_toBottomOf="@+id/boxFive"
-            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/categoryText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/regular"
-            android:text="Choose your category"
+            android:text="Easy Quizz"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/categoryTwo"
@@ -156,7 +159,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-        <com.google.android.material.card.MaterialCardView
+        <!--      <com.google.android.material.card.MaterialCardView
             android:id="@+id/boxOne"
             android:layout_width="360dp"
             android:layout_height="140dp"
@@ -352,11 +355,30 @@
                 android:textSize="13dp" />
 
 
-        </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView> -->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.core.widget.NestedScrollView>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-3dp"
+        android:layout_marginLeft="-3dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+    </androidx.viewpager.widget.ViewPager>
+
+</RelativeLayout>
 
 

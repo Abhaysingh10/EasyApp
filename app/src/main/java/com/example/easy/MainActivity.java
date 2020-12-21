@@ -15,6 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.easy.session.SessionManagment;
+import com.example.easy.session.UserSessionModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -90,33 +92,28 @@ public class MainActivity extends AppCompatActivity {
         cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, mapActivity.class));
+                startActivity(new Intent(MainActivity.this, category.class));
             }
         });
 
     }
 
-   // @Override
-    //protected void onStart() {
-    //    super.onStart();
-    //    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-    //}
 
-
-    private void signIn() {
+    private void signIn() {   // This is will be called when Google SignIN Button is clicked
         barActivated();
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RC_SIGN_IN){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
     }
+
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask){
         try {
             GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
@@ -124,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
             firebaseAuthWithGoogle(acc);
         } catch (ApiException e) {
             Toast.makeText(MainActivity.this, "Something went Wrongg", Toast.LENGTH_SHORT).show();
-            //    FirebaseGoogleAuth(null);
         }
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct){
         final AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(),null);
         firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this,new OnCompleteListener<AuthResult>(){
@@ -136,13 +133,12 @@ public class MainActivity extends AppCompatActivity {
                     barActivated();
                     Toast.makeText(MainActivity.this,"Successfull",Toast.LENGTH_SHORT).show();
                     FirebaseUser user = firebaseAuth.getCurrentUser();
-                    startActivity(new Intent(MainActivity.this, categories.class));
+                    startActivity(new Intent(MainActivity.this, category.class));
 
-                }    //   updateUI(user);
+                }
 
                 else {
                     Toast.makeText(MainActivity.this,"Failed",Toast.LENGTH_SHORT).show();
-                    //  updateUI(null);
                 }
             }
         });
@@ -164,6 +160,52 @@ public class MainActivity extends AppCompatActivity {
 
     private void barDeactivated(){
         progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    // Below method is managing session for the user
+
+    public void login(View view){
+        UserSessionModel user = new UserSessionModel(12, "Abhay");
+        SessionManagment sessionManagment = new SessionManagment(MainActivity.this);
+        sessionManagment.saveSession(user);
+        moveToMainActivity();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user!= null){
+            startActivity(new Intent(MainActivity.this, category.class));
+            finish();
+        }else {
+        }
+
+   //     checkSession();
+
+    }
+
+    private void checkSession() {
+        //check if user is logged in
+        SessionManagment sessionManagment = new SessionManagment(MainActivity.this);
+        int userID = sessionManagment.getSession();
+
+        if (userID!= -1){
+            // move to category Activity
+
+        }
+        else{
+
+        }
+    }
+
+    private void moveToMainActivity() {
+
+        Intent intent = new Intent(this, category.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
     }
 }
 
