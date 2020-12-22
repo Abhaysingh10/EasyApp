@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.GenericLifecycleObserver;
@@ -15,6 +16,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewStub;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,22 +42,24 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.concurrent.ConcurrentSkipListMap;
+
 public class categories extends AppCompatActivity {
 
-    TextView userName;
-    ImageView profileSettingbtn; ;
-    Button logoutbutn;
-    MaterialCardView cardView, categoryOne, categoryTwo, categoryThree, boxOne ;
-    TextView categoryTextOne, categoryTextTwo, categoryTextThree;
-    TextView categoryText ;
-    GoogleSignInOptions gso;
-    GoogleSignInClient mGoogleSignInClient;
-    FirebaseAuth firebaseAuth ;
-    String givenName;
+    private TextView userName;
+    private ImageView profileSettingbtn; ;
+    private Button logoutbutnn;
+    private MaterialCardView  categoryOne, categoryTwo, categoryThree ;
+    private TextView categoryTextOne, categoryTextTwo, categoryTextThree;
+    private TextView categoryText ;
+    private GoogleSignInOptions gso;
+    private GoogleSignInClient mGoogleSignInClient;
+    private FirebaseAuth firebaseAuth ;
+    private String givenName;
     private ViewPager viewPager;
     private ViewPageAdapter viewPageAdapter;
     private Fragment fragment;
-;
+    private ConstraintLayout constraintLayoutTwo;
 
 
     @Override
@@ -66,7 +70,7 @@ public class categories extends AppCompatActivity {
 
         userName = (TextView) findViewById(R.id.userName);
         //profileImage = findViewById(R.id.userProfile_Image);
-     //   logoutbutn = findViewById(R.id.logout_button);
+        logoutbutnn = findViewById(R.id.logout_button);
    //     cardView = findViewById(R.id.cardView);
         profileSettingbtn = findViewById(R.id.profileSetting);
         categoryOne = findViewById(R.id.categoryOne);
@@ -78,17 +82,15 @@ public class categories extends AppCompatActivity {
         categoryTextOne = findViewById(R.id.categoryTextOne);
         categoryTextTwo = findViewById(R.id.categoryTextTwo);
         categoryTextThree = findViewById(R.id.categoryTextThree);
-        viewPager = findViewById(R.id.viewPager);
+        constraintLayoutTwo = findViewById(R.id.constraintTwo);
         viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
         viewPageAdapter.addFragment(new cat1());
-        viewPager.setAdapter(viewPageAdapter);
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         categoryTextThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,13 +105,6 @@ public class categories extends AppCompatActivity {
             }
         });
 
-        categoryTextTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(categories.this, category.class));
-            }
-        });
-
         profileSettingbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,42 +112,30 @@ public class categories extends AppCompatActivity {
             }
         });
 
+        logoutbutnn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                firebaseAuth.getInstance().signOut();
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                if (firebaseUser == null) {
+                    startActivity(new Intent(categories.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                                                                                        | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                                                                                                    | Intent.FLAG_ACTIVITY_NEW_TASK));
+                }else {
+                    Toast.makeText(categories.this, "Nothing happened", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         categoryTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cat1 firstCategory = new cat1();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                 //   fragmentTransaction.replace()
+                ConstraintLayout stub = findViewById(R.id.constraintTwo);
+                stub.addView(stub, 100, R.layout.activity_category);
             }
         });
 
     }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        updateUI(firebaseUser);
-    }
-
-    ////// Need to work on ActivityResult
-
-    private void updateUI(FirebaseUser user){
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-      if (account != null){
-          String displayName = account.getDisplayName();
-          givenName = account.getGivenName();
-          userName.setText(givenName);
-       /*   Glide.with(this)
-                  .load(user.getPhotoUrl().toString())
-                  .into(profileImage);
-      */
-      }
-      else{
-          Toast.makeText(categories.this, "Something went wrong" , Toast.LENGTH_LONG).show();
-      }
-    }
-
 }
 

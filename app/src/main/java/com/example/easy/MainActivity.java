@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
     public GoogleSignInClient mGoogleSignInClient;
-    private final static int RC_SIGN_IN = 2;
+    private final static int RC_SIGN_IN = 0;
 
 
     @Override
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void signIn() {   // This is will be called when Google SignIN Button is clicked
         barActivated();
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -110,38 +109,44 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask){
-        try {
-            GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
-            Toast.makeText(MainActivity.this, "Signed In Successfully" , Toast.LENGTH_SHORT).show();
-            firebaseAuthWithGoogle(acc);
-        } catch (ApiException e) {
-            Toast.makeText(MainActivity.this, "Something went Wrongg", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct){
-        final AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(),null);
-        firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this,new OnCompleteListener<AuthResult>(){
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    barActivated();
-                    Toast.makeText(MainActivity.this,"Successfull",Toast.LENGTH_SHORT).show();
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    startActivity(new Intent(MainActivity.this, category.class));
-
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                if (account != null) {
+                    firebaseAuthWithGoogle(account.getIdToken());
+                } else{
+                    Log.w("AUTH", "Account is NULL");
+                    Toast.makeText(MainActivity.this, "Sign-in failed, try again later.", Toast.LENGTH_LONG).show();
                 }
-
-                else {
-                    Toast.makeText(MainActivity.this,"Failed",Toast.LENGTH_SHORT).show();
-                }
+            } catch (ApiException e) {
+                Log.w("AUTH", "Google sign in failed", e);
+                Toast.makeText(MainActivity.this, "Sign-in failed, try again later.", Toast.LENGTH_LONG).show();
             }
-        });
+        }
+    }
+
+
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            startActivity(new Intent(MainActivity.this, categories.class));
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            // Snackbar.make(mBinding.mainLayout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
     }
 
     private void updateUI(FirebaseUser fuser) {
@@ -162,51 +167,21 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setVisibility(View.INVISIBLE);
     }
 
-    // Below method is managing session for the user
-
-    public void login(View view){
-        UserSessionModel user = new UserSessionModel(12, "Abhay");
-        SessionManagment sessionManagment = new SessionManagment(MainActivity.this);
-        sessionManagment.saveSession(user);
-        moveToMainActivity();
-    }
+    // Checking session for user ---->
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user!= null){
-            startActivity(new Intent(MainActivity.this, category.class));
-            finish();
-        }else {
-        }
-
-   //     checkSession();
-
-    }
-
-    private void checkSession() {
-        //check if user is logged in
-        SessionManagment sessionManagment = new SessionManagment(MainActivity.this);
-        int userID = sessionManagment.getSession();
-
-        if (userID!= -1){
-            // move to category Activity
-
-        }
-        else{
-
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser!= null){
+            Intent intent = new Intent(MainActivity.this, categories.class);
+            intent.putExtra("userName", firebaseUser.getDisplayName());
+            startActivity(intent);
+        }else{
+            Toast.makeText(MainActivity.this, "", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void moveToMainActivity() {
-
-        Intent intent = new Intent(this, category.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-
-    }
 }
 
 
