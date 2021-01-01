@@ -13,15 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <activity android:name=".moviesList"></activity>
-        <activity android:name=".category" />
+        <activity android:name=".radioDemo"></activity>
+        <activity android:name=".MainPage" />
+        <activity android:name=".moviesList" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCNzVuA91zXuZFbi4I-0M614RWqTfBIE3k" />
 
         <activity android:name=".mapActivity" />
-        <activity android:name=".demoList" />
         <activity
             android:name=".profileSetting"
             android:theme="@style/categories" />

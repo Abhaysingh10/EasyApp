@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CFD8DC"
+    tools:context=".Profile">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/profiletxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="28dp"
+        android:fontFamily="@font/regular"
+        android:text="Profile"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/profileImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/profileImage"
+        android:layout_width="146dp"
+        android:layout_height="142dp"
+        android:layout_below="@+id/profiletxt"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="180dp"
+        android:src="@drawable/account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></com.mikhaellopez.circularimageview.CircularImageView>
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileImage"
+        android:layout_alignStart="@+id/profileImage"
+        android:layout_alignEnd="@+id/profileImage"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/regular"
+        android:text="userName"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="@+id/profileImage"
+        app:layout_constraintStart_toStartOf="@+id/profileImage"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage"></TextView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/logoutCard"
+        android:layout_width="393dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="2dp"
+        app:cardBackgroundColor="#CFD8DC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreCard">
+
+        <TextView
+            android:id="@+id/logoutText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/regular"
+            android:text="logout"
+            android:textSize="15dp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/scoreCard"
+        android:layout_width="393dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="2dp"
+        app:cardBackgroundColor="#CFD8DC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailCard">
+
+        <TextView
+            android:id="@+id/scoreCardText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/regular"
+            android:text="Score"
+            android:textSize="15dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+
+        android:id="@+id/emailCard"
+        android:layout_width="393dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:textAlignment="textStart"
+        app:cardBackgroundColor="#CFD8DC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userName">
+
+        <TextView
+            android:id="@+id/emailtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/regular"
+            android:text="Email"
+            android:textSize="15dp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/suggestionCard"
+        android:layout_width="393dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="2dp"
+        android:textAlignment="textStart"
+        app:cardBackgroundColor="#CFD8DC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoutCard">
+
+        <TextView
+            android:id="@+id/suggestionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/regular"
+            android:text="Suggestion "
+            android:textSize="15dp" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

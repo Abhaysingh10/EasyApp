@@ -1,8 +1,10 @@
 package com.example.easy;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,24 +16,12 @@ import android.view.MenuItem;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class category extends AppCompatActivity {
+public class category extends Fragment {
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewRss;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category);
-
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        String[] category = {"scifi", "Thriller", "comedy", "Romantic", "Horror", "Erotic", "Biography", "Patriotic"};
-
-        // firebaserecycleradapterforcategory firebaserecycleradapterforcategory =  new firebaserecycleradapterforcategory(options);
-        recyclerView.setAdapter(new categoryAdapter(category,getApplicationContext()));
-
-
-
-
     }
 }

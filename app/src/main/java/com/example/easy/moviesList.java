@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,13 +43,13 @@ import java.util.Map;
 public class moviesList extends AppCompatActivity {
 
     private static final String TAG = ACCESSIBILITY_SERVICE; ;
-    private RecyclerView recyclerView ;
+    private RecyclerView recyclerViewMoviesList ;
     private FirebaseFirestore firebaseFirestore;
     private DocumentReference noteRef;
     private CollectionReference notebookRef ;
     private List<movieListModel> movieList ;
     private movieListAdapter movieListAdapter;
-    private String movieName, description ;
+    private String movieName, description, documentID ;
     private String movieGenre;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,20 +57,19 @@ public class moviesList extends AppCompatActivity {
         setContentView(R.layout.activity_movies_list);
 
         movieGenre = getIntent().getExtras().get("Genre Name").toString();
-        recyclerView = findViewById(R.id.moviesList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewMoviesList = findViewById(R.id.moviesList);
+        recyclerViewMoviesList.setLayoutManager(new LinearLayoutManager(this));
         movieList = new ArrayList<>();
-        movieListAdapter = new movieListAdapter(movieList) ;
-        recyclerView.setAdapter(movieListAdapter);
+        movieListAdapter = new movieListAdapter(movieList, getApplicationContext()) ;
+        recyclerViewMoviesList.setAdapter(movieListAdapter);
         firebaseFirestore = FirebaseFirestore.getInstance();
         notebookRef = firebaseFirestore.collection(movieGenre);
-        HashMap note = new HashMap();
-
-        movieListModel movieListModel = new movieListModel(movieName, description) ;
-
-
-
-
+      //  Toast.makeText(getApplicationContext(), movieGenre, Toast.LENGTH_SHORT).show();
+        SharedPreferences sharedPreferences = getSharedPreferences("GenreName", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Genre", movieGenre);
+        editor.apply();
+        movieListModel movieListModel = new movieListModel(movieName, description, documentID) ;
         notebookRef.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -77,36 +77,14 @@ public class moviesList extends AppCompatActivity {
                         if (task.isSuccessful()){
                             for (QueryDocumentSnapshot documentSnapshot :task.getResult()){
                                 movieList.add(new movieListModel(
-                                   documentSnapshot.get("movieName").toString(),
-                                    documentSnapshot.get("description").toString()
+                                        documentSnapshot.get("movieName").toString(),
+                                        documentSnapshot.get("description").toString(),
+                                        documentSnapshot.getId().toString()
                                 ));
                             }
-
                          movieListAdapter.notifyDataSetChanged();
-
                         }
-
                     }
                 });
-
-
-//        notebookRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//            @Override
-//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                    String[] movieDocument ;
-//                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-//                        movieListModel movieListModel1 = documentSnapshot.toObject(movieListModel.class);
-//
-//                        String movieName = documentSnapshot.getString("movieName");
-//                        String descriptiom = documentSnapshot.getString("description");
-//
-//
-//                    }
-//                        recyclerView.setAdapter(new movieListAdapter());
-//            }
-//        });
-
-
-
     }
 }

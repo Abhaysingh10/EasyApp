@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/home"
+        app:cnb_textColor ="#000"
+        app:cnb_iconColor = "#000"
+        app:cnb_backgroundColor = "#fff">
+    </item>
+
+    <item android:id="@+id/category"
+        android:title="Category"
+        android:icon="@drawable/category"
+        app:cnb_textColor ="#000"
+        app:cnb_iconColor = "#000"
+        app:cnb_backgroundColor = "#fff">
+    </item>
+
+    <item android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/account"
+        app:cnb_textColor ="#000"
+        app:cnb_iconColor = "#000"
+        app:cnb_backgroundColor = "#fff">
+    </item>
+
+
+</menu>

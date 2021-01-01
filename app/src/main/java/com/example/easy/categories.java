@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.GenericLifecycleObserver;
 import androidx.viewpager.widget.ViewPager;
@@ -69,73 +70,47 @@ public class categories extends AppCompatActivity {
 
 
         userName = (TextView) findViewById(R.id.userName);
-        //profileImage = findViewById(R.id.userProfile_Image);
-        logoutbutnn = findViewById(R.id.logout_button);
-   //     cardView = findViewById(R.id.cardView);
         profileSettingbtn = findViewById(R.id.profileSetting);
         categoryOne = findViewById(R.id.categoryOne);
         categoryTwo = findViewById(R.id.categoryTwo);
         categoryThree = findViewById(R.id.categoryThree);
-      //  boxOne = findViewById(R.id.boxOne);
         categoryText = findViewById(R.id.categoryText);
         firebaseAuth = firebaseAuth.getInstance();
         categoryTextOne = findViewById(R.id.categoryTextOne);
         categoryTextTwo = findViewById(R.id.categoryTextTwo);
         categoryTextThree = findViewById(R.id.categoryTextThree);
-        constraintLayoutTwo = findViewById(R.id.constraintTwo);
         viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
         viewPageAdapter.addFragment(new cat1());
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        categoryThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(categories.this, MainPage.class));
+            }
+        });
+
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
+
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         categoryTextThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             mGoogleSignInClient.signOut()
-             .addOnCompleteListener(categories.this, new OnCompleteListener<Void>() {
-                 @Override
-                 public void onComplete(@NonNull Task<Void> task) {
-                     Toast.makeText(categories.this, "Logged out", Toast.LENGTH_SHORT).show();
-                 }
-             });
+                mGoogleSignInClient.signOut()
+                        .addOnCompleteListener(categories.this, new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(categories.this, "Logged out", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                 startActivity(new Intent(categories.this, MainActivity.class));
             }
         });
-
-        profileSettingbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(categories.this, profileSetting.class));
-            }
-        });
-
-        logoutbutnn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                firebaseAuth.getInstance().signOut();
-                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser == null) {
-                    startActivity(new Intent(categories.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                                                                                        | Intent.FLAG_ACTIVITY_CLEAR_TOP
-                                                                                                                    | Intent.FLAG_ACTIVITY_NEW_TASK));
-                }else {
-                    Toast.makeText(categories.this, "Nothing happened", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        categoryTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ConstraintLayout stub = findViewById(R.id.constraintTwo);
-                stub.addView(stub, 100, R.layout.activity_category);
-            }
-        });
-
     }
-}
+    }
+
 

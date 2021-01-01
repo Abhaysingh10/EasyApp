@@ -6,5 +6,7 @@
     <color name="white">#ffffff</color>
     <color name="categoryColor">#B6F3AD</color>
     <color name="statusColor" >#28CC9B</color>
+    <color name="wrongAnswerColor">#BF6C44</color>
+    <color name="rightAnswerColor">#5FBC5D</color>
 
 </resources>

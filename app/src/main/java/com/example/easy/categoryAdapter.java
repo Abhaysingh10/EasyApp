@@ -42,7 +42,7 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.holder
 
 
         holder.description.setText(category[position]);
-        holder.poster.setOnClickListener(new View.OnClickListener() {
+        holder.description.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -69,7 +69,7 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.holder
         
         public holder(@NonNull View itemView) {
             super(itemView);
-            poster = itemView.findViewById(R.id.poster);
+           // poster = itemView.findViewById(R.id.poster);
             description = itemView.findViewById(R.id.description);
             posterLayout = itemView.findViewById(R.id.posterLayout);
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/posterLayout"
@@ -11,51 +11,31 @@
 
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="357dp"
+
+        android:layout_width="355dp"
         android:layout_height="140dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginRight="29dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/backgroundadapter"
         android:clickable="true"
-        android:outlineAmbientShadowColor="@color/cardview_shadow_end_color"
-        app:cardBackgroundColor="@color/categoryColor"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="-1dp">
-
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/poster"
-            android:layout_width="125dp"
-            android:layout_height="133dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="0dp"
-            android:src="@drawable/mirzapur"
-            app:civ_border_color="#000000"
-            app:civ_border_width="2dp"
-            app:civ_shadow="true"
-            app:civ_shadow_color="#00858080"
-            app:civ_shadow_radius="10dp" />
-
+        app:cardCornerRadius="10dp"
+        app:cardElevation="1dp">
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="175dp"
-            android:layout_height="68dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="45dp"
-            android:fontFamily="@font/regular"
-            android:lineSpacingExtra="8sp"
-            android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et."
-            android:textSize="13dp" />
-
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="30dp"
+            android:paddingTop="40dp"
+            android:background="@drawable/backgroundadapter"
+            android:text="Category"
+            android:textColor="#fff"
+            android:textSize="35dp"
+            android:textStyle="bold|italic"></TextView>
     </com.google.android.material.card.MaterialCardView>
-
-
-
 </RelativeLayout>
