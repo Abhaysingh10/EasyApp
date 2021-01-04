@@ -16,7 +16,10 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.CountDownTimer;
 import android.util.Log;
+import android.util.TimeUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,10 +50,13 @@ import com.google.protobuf.StringValue;
 import java.lang.ref.Reference;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import static android.graphics.Color.RED;
 import static android.graphics.Color.red;
 import static com.example.easy.R.color.accent_material_dark;
+import static com.example.easy.R.color.bright_foreground_inverse_material_dark;
 import static com.example.easy.R.color.colorPrimary;
 import static com.example.easy.R.color.leak_canary_heap_float_array;
 import static com.example.easy.R.color.material_blue_grey_800;
@@ -60,20 +66,21 @@ import static com.example.easy.R.color.wrongAnswerColor;
 import static com.example.easy.R.color.wrongAnswerColor;
 import static com.example.easy.R.drawable.rightanswer;
 
-public class Questionnaire extends AppCompatActivity implements View.OnClickListener {
+public class Questionnaire extends AppCompatActivity implements View.OnClickListener  {
 
     private ListView listView;
-    private TextView Question, question, movieName, scorecardTextView;
+    private TextView Question, question, movieName, scorecardTextView, timer;
     private Node node;
-    private int branchAddress = 1;
+    private  int branchAddress = 1;
     int temp = 0 ;
     private MaterialButton optionOne, optionTwo, optionThree, optionFour, nextBtn;
     private String movieNameTxt, documentIDtext, answer;
-    private int score = 114;
+    private int score = 0;
     private FirebaseFirestore firebaseFirestore;
     private DocumentReference documentReference;
     private CollectionReference notebookRef;
     private SharedPreferences scoreCard;
+    private CountDownTimer countDownTimer ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,12 +91,11 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
         SharedPreferences sharedPreferences = getSharedPreferences("GenreName", MODE_PRIVATE);
         String genreName = sharedPreferences.getString("Genre", null);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
-
         scoreCard = getSharedPreferences("scoreCardFile", MODE_PRIVATE);
         SharedPreferences.Editor scoreEditor = scoreCard.edit();
         editor.putInt("score", score);
         editor.apply();
+        timer = findViewById(R.id.timer);
         movieName = findViewById(R.id.movieName);
         question = findViewById(R.id.Question);
         optionOne = findViewById(R.id.optionOne);
@@ -104,50 +110,88 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
         movieName.setText(movieNameTxt);
 
 //        Toast.makeText(this, String.valueOf(branchAddress), Toast.LENGTH_SHORT).show();
+       // startTimer();
         startGame(notebookRef, branchAddress);
         scorecardTextView = findViewById(R.id.textView2);
 
+// Action after nextClick
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToNextQuestion();
+            }
+        });
     }
+
+    private void startTimer(){
+            // Intialize timer duration
+            long duration = TimeUnit.SECONDS.toMillis(10);
+
+            // Initialize counter timer
+
+             countDownTimer = new CountDownTimer(duration, 10) {
+                @Override
+                public void onTick(long l) {
+                    String sDuration = String.format(Locale.ENGLISH, "%02d:%02d",TimeUnit.MILLISECONDS.toMinutes(l),
+                            TimeUnit.MILLISECONDS.toSeconds(l) - TimeUnit.SECONDS.toMinutes(TimeUnit.MILLISECONDS.toSeconds(l)));
+                    // Setting the view
+                    timer.setText(sDuration);
+                }
+
+                @Override
+                public void onFinish() {
+                    moveToNextQuestion();
+                }
+            }.start();
+    }
+
+
+    private void stopTimer(){
+        countDownTimer.cancel();
+    }
+
+    private void moveToNextQuestion(){
+        branchAddress++;
+        if(branchAddress <= 5) {
+            startGame(notebookRef, branchAddress);
+        }else
+        {
+            Toast.makeText(Questionnaire.this, " This is your high score : " + temp, Toast.LENGTH_SHORT ).show();
+        }
+    }
+
 
     private void startGame(CollectionReference notebookRef, int branchAddress) {
         this.notebookRef = notebookRef;
-        this.branchAddress = branchAddress;
-
-
         notebookRef.document(String.valueOf(branchAddress))
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot documentSnapshot = task.getResult();
-                                String QUESION = documentSnapshot.get("question").toString();
-                                //Toast.makeText(Questionnaire.this, QUESION, Toast.LENGTH_SHORT).show();
-                                question.setText(QUESION);
-                                optionOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(white)));
-                                optionOne.setText(documentSnapshot.get("optionOne").toString());
-                                optionOne.setOnClickListener(Questionnaire.this::onClick);
-                                optionTwo.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(white)));
-                                optionTwo.setText(documentSnapshot.get("optionTwo").toString());
-                                optionTwo.setOnClickListener(Questionnaire.this::onClick);
-                                optionThree.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(white)));
-                                optionThree.setText(documentSnapshot.get("optionThree").toString());
-                                optionThree.setOnClickListener(Questionnaire.this::onClick);
-                                optionFour.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(white)));
-                                optionFour.setText(documentSnapshot.get("optionFour").toString());
-                                optionFour.setOnClickListener(Questionnaire.this::onClick);
-                                answer = documentSnapshot.get("answer").toString();
-                            }
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot documentSnapshot = task.getResult();
+                            String QUESION = documentSnapshot.get("question").toString();
+                            //Toast.makeText(Questionnaire.this, QUESION, Toast.LENGTH_SHORT).show();
+                            question.setText(QUESION);
+                            optionOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(white)));
+                            optionOne.setText(documentSnapshot.get("optionOne").toString());
+                            optionOne.setOnClickListener(Questionnaire.this::onClick);
+                            optionTwo.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(white)));
+                            optionTwo.setText(documentSnapshot.get("optionTwo").toString());
+                            optionTwo.setOnClickListener(Questionnaire.this::onClick);
+                            optionThree.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(white)));
+                            optionThree.setText(documentSnapshot.get("optionThree").toString());
+                            optionThree.setOnClickListener(Questionnaire.this::onClick);
+                            optionFour.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(white)));
+                            optionFour.setText(documentSnapshot.get("optionFour").toString());
+                            optionFour.setOnClickListener(Questionnaire.this::onClick);
+                            answer = documentSnapshot.get("answer").toString();
+                            startTimer();
                         }
-                    });
-
-            nextBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startGame(notebookRef, branchAddress+1);
-                }
-            });
-
+                    }
+                });
+        this.branchAddress = branchAddress;
+        branchAddress++;
     }
 
     public void onClick(View view) {
@@ -161,15 +205,20 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
         String buttonText;
         switch (view.getId()) {
             case R.id.optionOne:
+                stopTimer();
                 buttonText = b1.getText().toString();
                 if (buttonText.equals(answer)) {
                     //Saving the score
                     temp++ ;
+                    score++ ;
+                    scoreEditor.putInt("score", score);
+                    scoreEditor.apply();
                     // Changing the colors of the buttons after click
                     optionOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
                     optionOne.setClickable(false);
                     //displaying the score simultaneoulsy
                     scorecardTextView.setText(String.valueOf(temp));
+
                 } else {
                     optionOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(wrongAnswerColor)));
                     if ((b2.getText().toString()).equals(answer)) {
@@ -185,9 +234,11 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case R.id.optionTwo:
+                stopTimer();
                 buttonText = b2.getText().toString();
                 if (buttonText.equals(answer)) {
                     temp++;
+                    score++;
                     // Changing the colors of the buttons after click
                     optionTwo.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
                     //displaying the score simultaneoulsy
@@ -195,7 +246,7 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                     optionTwo.setClickable(false);
                 }else {
                     optionTwo.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(wrongAnswerColor)));
-                    if ((b2.getText().toString()).equals(answer)) {
+                    if ((b1.getText().toString()).equals(answer)) {
                         optionOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
                         optionOne.setClickable(false);
                     } else if ((b3.getText().toString()).equals(answer)) {
@@ -209,6 +260,7 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
 
                 break;
             case R.id.optionThree:
+                stopTimer();
                 buttonText = b3.getText().toString();
                 if (buttonText.equals(answer)) {
                     temp++;
@@ -216,12 +268,13 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                     optionThree.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
                     //displaying the score simultaneoulsy
                     scorecardTextView.setText(String.valueOf(temp));
+                    optionThree.setClickable(false);
                 }else {
                     optionThree.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(wrongAnswerColor)));
                     if ((b2.getText().toString()).equals(answer)) {
                         optionTwo.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
                         optionTwo.setClickable(false);
-                    } else if ((b3.getText().toString()).equals(answer)) {
+                    } else if ((b1.getText().toString()).equals(answer)) {
                         optionOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
                         optionOne.setClickable(false);
                     } else if ((b4.getText().toString()).equals(answer)) {
@@ -231,6 +284,7 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case R.id.optionFour:
+                stopTimer();
                 buttonText = b4.getText().toString();
                 if (buttonText.equals(answer)) {
                     temp++;
@@ -247,7 +301,7 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                     } else if ((b3.getText().toString()).equals(answer)) {
                         optionThree.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
                         optionThree.setClickable(false);
-                    } else if ((b4.getText().toString()).equals(answer)) {
+                    } else if ((b1.getText().toString()).equals(answer)) {
                         optionOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
                         optionOne.setClickable(false);
                     }
@@ -257,4 +311,5 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                 throw new IllegalStateException("Unexpected value: " + view.getId());
         }
     }
+
 }

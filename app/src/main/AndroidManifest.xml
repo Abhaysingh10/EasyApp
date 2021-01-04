@@ -37,8 +37,7 @@
         <activity android:name=".registerActivity" />
         <activity
             android:name=".splashscreen"
-            android:noHistory="true"
-            android:theme="@style/s">
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -46,6 +46,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
         android:text="0"
+        android:textStyle="bold"
+        android:fontFamily="@font/regular"
+        android:textSize="24dp"
         app:layout_constraintBottom_toTopOf="@+id/optionOne"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Question"
@@ -143,6 +146,18 @@
         app:layout_constraintEnd_toEndOf="@+id/optionFour"
         app:layout_constraintStart_toStartOf="@+id/optionFour"
         app:layout_constraintTop_toBottomOf="@+id/optionFour" />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textStyle="bold"
+        android:fontFamily="@font/regular"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/optionOne"
+        app:layout_constraintStart_toStartOf="@+id/optionOne"
+        app:layout_constraintTop_toBottomOf="@+id/Question" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
