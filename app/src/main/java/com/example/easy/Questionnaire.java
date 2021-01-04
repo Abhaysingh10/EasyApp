@@ -68,7 +68,7 @@ import static com.example.easy.R.drawable.rightanswer;
 
 public class Questionnaire extends AppCompatActivity implements View.OnClickListener  {
 
-    private ListView listView;
+    // private ListView listView;
     private TextView Question, question, movieName, scorecardTextView, timer;
     private Node node;
     private  int branchAddress = 1;
