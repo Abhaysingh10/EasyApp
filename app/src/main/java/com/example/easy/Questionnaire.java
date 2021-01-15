@@ -27,6 +27,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -46,11 +47,13 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 import com.google.protobuf.StringValue;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.lang.ref.Reference;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static android.graphics.Color.RED;
@@ -81,6 +84,7 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
     private CollectionReference notebookRef;
     private SharedPreferences scoreCard;
     private CountDownTimer countDownTimer ;
+    private CircularImageView circularImageViewPoster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +99,7 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
         SharedPreferences.Editor scoreEditor = scoreCard.edit();
         editor.putInt("score", score);
         editor.apply();
+        circularImageViewPoster = findViewById(R.id.poster);
         timer = findViewById(R.id.timer);
         movieName = findViewById(R.id.movieName);
         question = findViewById(R.id.Question);
@@ -108,6 +113,24 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                 .document(documentIDtext)
                 .collection(movieNameTxt);
         movieName.setText(movieNameTxt);
+
+        // for movie poster
+        documentReference = firebaseFirestore.collection(genreName).document(documentIDtext);
+        documentReference.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()){
+                            DocumentSnapshot documentSnapshot = task.getResult();
+                            String imgURL = documentSnapshot.get("poster").toString() ;
+                            Glide.with(Questionnaire.this)
+                                    .load(imgURL)
+                                    .placeholder(R.drawable.posterproto)
+                                    .into(circularImageViewPoster);
+                        }
+                    }
+                });
+
 
 //        Toast.makeText(this, String.valueOf(branchAddress), Toast.LENGTH_SHORT).show();
        // startTimer();
@@ -145,21 +168,24 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
             }.start();
     }
 
-
     private void stopTimer(){
         countDownTimer.cancel();
     }
 
     private void moveToNextQuestion(){
         branchAddress++;
-        if(branchAddress <= 5) {
+        if(branchAddress <= 6) {
             startGame(notebookRef, branchAddress);
         }else
         {
-            Toast.makeText(Questionnaire.this, " This is your high score : " + temp, Toast.LENGTH_SHORT ).show();
+            countDownTimer.cancel();
+            int currentScore = temp;
+            Intent intent = new Intent(this, Result.class);
+            intent.putExtra("currentScore", currentScore);
+            startActivity(intent);
+
         }
     }
-
 
     private void startGame(CollectionReference notebookRef, int branchAddress) {
         this.notebookRef = notebookRef;
@@ -210,9 +236,6 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                 if (buttonText.equals(answer)) {
                     //Saving the score
                     temp++ ;
-                    score++ ;
-                    scoreEditor.putInt("score", score);
-                    scoreEditor.apply();
                     // Changing the colors of the buttons after click
                     optionOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
                     optionOne.setClickable(false);
@@ -238,7 +261,6 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                 buttonText = b2.getText().toString();
                 if (buttonText.equals(answer)) {
                     temp++;
-                    score++;
                     // Changing the colors of the buttons after click
                     optionTwo.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
                     //displaying the score simultaneoulsy

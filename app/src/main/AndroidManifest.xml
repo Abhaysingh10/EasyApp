@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <activity android:name=".radioDemo"></activity>
+        <activity android:name=".Result"></activity>
+        <activity android:name=".radioDemo" />
         <activity android:name=".MainPage" />
         <activity android:name=".moviesList" />
 
