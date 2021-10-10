@@ -175,6 +175,7 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
     private void moveToNextQuestion(){
         branchAddress++;
         if(branchAddress <= 6) {
+            countDownTimer.cancel();
             startGame(notebookRef, branchAddress);
         }else
         {
@@ -196,9 +197,9 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             DocumentSnapshot documentSnapshot = task.getResult();
-                            String QUESION = documentSnapshot.get("question").toString();
-                            //Toast.makeText(Questionnaire.this, QUESION, Toast.LENGTH_SHORT).show();
-                            question.setText(QUESION);
+                            String QUESTION = documentSnapshot.get("question").toString();
+                            //Toast.makeText(Questionnaire.this, QUESTION, Toast.LENGTH_SHORT).show();
+                            question.setText(QUESTION);
                             optionOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(white)));
                             optionOne.setText(documentSnapshot.get("optionOne").toString());
                             optionOne.setOnClickListener(Questionnaire.this::onClick);
@@ -239,7 +240,7 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                     // Changing the colors of the buttons after click
                     optionOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
                     optionOne.setClickable(false);
-                    //displaying the score simultaneoulsy
+                    //displaying the score simultaneously
                     scorecardTextView.setText(String.valueOf(temp));
 
                 } else {
@@ -263,7 +264,7 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                     temp++;
                     // Changing the colors of the buttons after click
                     optionTwo.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
-                    //displaying the score simultaneoulsy
+                    //displaying the score simultaneously
                     scorecardTextView.setText(String.valueOf(temp));
                     optionTwo.setClickable(false);
                 }else {
@@ -288,7 +289,7 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                     temp++;
                     // Changing the colors of the buttons after click
                     optionThree.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
-                    //displaying the score simultaneoulsy
+                    //displaying the score simultaneously
                     scorecardTextView.setText(String.valueOf(temp));
                     optionThree.setClickable(false);
                 }else {
@@ -312,7 +313,7 @@ public class Questionnaire extends AppCompatActivity implements View.OnClickList
                     temp++;
                     // Changing the colors of the buttons after click
                     optionFour.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(rightAnswerColor)));
-                    //displaying the score simultaneoulsy
+                    //displaying the score simultaneously
                     optionFour.setClickable(false);
                     scorecardTextView.setText(String.valueOf(temp));
                 }else {
